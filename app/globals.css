@@ -5,13 +5,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -20,7 +13,27 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background text-foreground font-sans;
 }
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-lg px-4 py-2 font-medium transition-all duration-200;
+}
+.btn-primary {
+  @apply bg-primary text-white hover:bg-primary-dark disabled:bg-gray-400 disabled:cursor-not-allowed;
+}
+.btn-secondary {
+  @apply bg-secondary text-white hover:bg-secondary-dark disabled:bg-gray-400 disabled:cursor-not-allowed;
+}
+.btn-loading {
+  @apply relative text-white bg-primary;
+}
+.btn-loading::after {
+  content: "";
+  @apply absolute right-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin;
+}
+
+.input {
+  @apply w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary disabled:bg-gray-100 disabled:cursor-not-allowed;
+}
+
